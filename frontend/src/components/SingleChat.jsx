@@ -15,7 +15,7 @@ import animationData from "../animations/typing.json";
 import io from "socket.io-client";
 import UpdateGroupChatModal from "./miscellaneous/UpdateGroupChatModal";
 import { ChatState } from "../Context/ChatProvider";
-const ENDPOINT = `${process.env.REACT_APP_SOCKET_URL?process.env.REACT_APP_SOCKET_URL:""}`;
+const ENDPOINT = `${import.meta.env.VITE_API_SOCKET_URL?import.meta.env.VITE_API_SOCKET_URL:""}`;
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {

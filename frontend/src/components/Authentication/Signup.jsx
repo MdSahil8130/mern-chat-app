@@ -14,10 +14,10 @@ const Signup = () => {
   const toast = useToast();
   const history = useHistory();
   const { setUser } = ChatState();
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [confirmpassword, setConfirmpassword] = useState();
-  const [password, setPassword] = useState();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [confirmpassword, setConfirmpassword] = useState("");
+  const [password, setPassword] = useState("");
   const [pic, setPic] = useState();
   const [picLoading, setPicLoading] = useState(false);
 
