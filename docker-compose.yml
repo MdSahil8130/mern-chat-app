@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:5.0
+    container_name: chat-app-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - chat-app-network
+
+  # Chat Application
+  chat-app:
+    build: .
+    container_name: mern-chat-app
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - MONGO_URI=mongodb://admin:password123@mongodb:27017/chatapp?authSource=admin
+      - JWT_SECRET=your_jwt_secret_here
+    depends_on:
+      - mongodb
+    networks:
+      - chat-app-network
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/frontend/node_modules
+
+# Named volumes
+volumes:
+  mongodb_data:
+
+# Networks
+networks:
+  chat-app-network:
+    driver: bridge
